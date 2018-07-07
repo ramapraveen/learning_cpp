@@ -4,8 +4,8 @@
 using namespace std;
 
 class MyError {
-	const char *data;
 public:
+	const char *data;
 	MyError(const char *msg) : data(msg) {}
 };
 
@@ -15,16 +15,25 @@ public:
 	~Rainbow() { std::cout<<"In Raibow destructor"<<endl; }
 };
 
-void f() {
+void a() {
 	Rainbow rb;
 	throw MyError("something bad happened");
 }
 
+void b() {
+	try {
+		a();
+	} catch(...) {
+		cout<<"in b exception happened, rethrowing"<<endl;
+		throw; //XXX exception is preserved for main to see it
+	}
+}
+
 int main() {
 	try {
-		f();
+		b();
 	} catch (MyError &err) {
-		cout << "exception caught"<<endl;
+		cout <<err.data<<endl;
 	}
 	cout<<"after try catch block"<<endl;
 	return 0;
@@ -35,6 +44,7 @@ int main() {
 
 In Raibow constructor
 In Raibow destructor
-exception caught
+in b exception happened, rethrowing
+something bad happened
 after try catch block
 */

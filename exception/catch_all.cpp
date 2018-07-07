@@ -23,7 +23,7 @@ void f() {
 int main() {
 	try {
 		f();
-	} catch (MyError &err) {
+	} catch (...) {
 		cout << "exception caught"<<endl;
 	}
 	cout<<"after try catch block"<<endl;
