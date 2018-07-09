@@ -7,7 +7,14 @@ public:
 	BaseException() { cout<<"in BaseException"<<endl; }
 };
 
-//XXX note public inheritance is needed
+/* XXX note public inheritance is needed
+ * if not, its equivalant to private inheritance,
+ * in private inheritance. 
+ * for DeriveException d; BaseException &b = d; below is the error
+ * error: cannot cast 'DerivedException' to its private base class 'BaseException'
+ * The language doesn't allow you to refer to a derived class from a private base
+*/
+
 class DerivedException : public BaseException {
 public:
 	DerivedException() { cout<<"in DerivedException"<<endl; }
